@@ -3,6 +3,7 @@ import {createComparison, defaultRules} from "../lib/compare.js";
 // @todo: #4.3 — настроить компаратор
 const compare = createComparison(defaultRules);
 
+
 export function initFiltering(elements, indexes) {
     // @todo: #4.1 — заполнить выпадающие списки опциями
     Object.keys(indexes)                                    // Получаем ключи из объекта
@@ -20,6 +21,7 @@ export function initFiltering(elements, indexes) {
 
     return (data, state, action) => {
         // @todo: #4.2 — обработать очистку поля
+        console.log('State:', state);
         if (action && action.name === 'clear') {
             const field = action.dataset.field;
             const input = action.parentElement.querySelector(`[data-field="${field}"]`);
@@ -30,6 +32,12 @@ export function initFiltering(elements, indexes) {
         }
 
         // @todo: #4.5 — отфильтровать данные используя компаратор
-        return data.filter(row => compare(row, state));
-    }
-}
+      return data.filter(row => {
+    const totalFrom = Number(state.totalFrom) || -Infinity;
+    const totalTo = Number(state.totalTo) || Infinity;
+
+    const inRange = row.total >= totalFrom && row.total <= totalTo;
+
+    return compare(row, state) && inRange;
+});
+}}
