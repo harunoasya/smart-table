@@ -49,8 +49,13 @@ function render(action) {
     // @todo: использование
     result = applySearching(result, state, action);
     result = applyFiltering(result, state, action);
-    result = applyPagination(result, state, action);
+
+    if (state.search || state.seller || state.customer || state.date || state.totalFrom || state.totalTo) {
+        state.page = 1;
+    }
+
     result = applySorting(result, state, action);
+    result = applyPagination(result, state, action);
     
 
 

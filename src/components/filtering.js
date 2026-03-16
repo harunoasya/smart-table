@@ -22,6 +22,8 @@ export function initFiltering(elements, indexes) {
     return (data, state, action) => {
         // @todo: #4.2 — обработать очистку поля
         console.log('State:', state);
+        if (action && action.name !== 'clear') {
+          state.page = 1;}
         if (action && action.name === 'clear') {
             const field = action.dataset.field;
             const input = action.parentElement.querySelector(`[data-field="${field}"]`);
