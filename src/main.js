@@ -50,14 +50,14 @@ function render(action) {
     result = applySearching(result, state, action);
     result = applyFiltering(result, state, action);
 
-    if (state.search || state.seller || state.customer || state.date || state.totalFrom || state.totalTo) {
-        state.page = 1;
+    if (action && ['search', 'seller', 'customer', 'date', 'totalFrom', 'totalTo', 'clear'].includes(action.name)) {
+            state.page = 1;
     }
 
     result = applySorting(result, state, action);
     result = applyPagination(result, state, action);
     
-
+ 
 
     sampleTable.render(result)
 }

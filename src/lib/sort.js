@@ -8,13 +8,19 @@
  * массива объектов по возрастанию. Функция возвращает другую функцию,
  * что позволяет переиспользовать логику сортировки с разными полями.
  */
+const isDateField = (field) => field === 'date';
+
 const sortUp = field => (a, b) => {
-    if (a[field] > b[field]) {
-        return 1;  // Значение в a больше, чем в b, перемещаем a вправо
+    let valueA = a[field];
+    let valueB = b[field];
+
+    if (isDateField(field)) {
+        valueA = new Date(valueA).getTime();
+        valueB = new Date(valueB).getTime();
     }
-    if (a[field] < b[field]) {
-        return -1; // Значение в a меньше, чем в b, перемещаем a влево
-    }
+
+    if (valueA > valueB) return 1;
+    if (valueA < valueB) return -1;
     return 0;      // Значения равны, сохраняем текущий порядок
 }
 
@@ -29,12 +35,16 @@ const sortUp = field => (a, b) => {
  * Логика инвертирована по сравнению с сортировкой по возрастанию.
  */
 const sortDown = field => (a, b) => {
-    if (a[field] < b[field]) {
-        return 1;  // Значение в a меньше, чем в b, перемещаем a вправо
+    let valueA = a[field];
+    let valueB = b[field];
+
+    if (isDateField(field)) {
+        valueA = new Date(valueA).getTime();
+        valueB = new Date(valueB).getTime();
     }
-    if (a[field] > b[field]) {
-        return -1; // Значение в a больше, чем в b, перемещаем a влево
-    }
+
+    if (valueA < valueB) return 1;
+    if (valueA > valueB) return -1;
     return 0;      // Значения равны, сохраняем текущий порядок
 }
 
