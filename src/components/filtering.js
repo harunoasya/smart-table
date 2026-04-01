@@ -40,7 +40,7 @@ export function initFiltering(elements) {
     })
 
     return Object.keys(filter).length ? Object.assign({}, query, filter) : query; // если в фильтре что-то добавилось, применим к запросу
-    }
+  }
 
   return {
       updateIndexes,

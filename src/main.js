@@ -31,12 +31,12 @@ function collectState() {
     const totalTo = state.totalTo ? Number(state.totalTo) : undefined;
     
     return {
-    ...state,
-    rowsPerPage,
-    page,
-    totalFrom,
-    totalTo
-};
+        ...state,
+        rowsPerPage,
+        page,
+        totalFrom,
+        totalTo
+    };
 }
 
 /**
@@ -84,8 +84,7 @@ const applySorting = initSorting([
     sampleTable.header.elements.sortByTotal
 ]);
 
-const {applyFiltering, updateIndexes} = initFiltering(
-    sampleTable.filter.elements);
+const {applyFiltering, updateIndexes} = initFiltering(sampleTable.filter.elements);
 
 const applySearching = initSearching('search');
 

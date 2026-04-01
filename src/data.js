@@ -49,7 +49,7 @@ export function initData(sourceData) {
         };
 
         return lastResult;
-        };
+    };
 
     return {
         getIndexes,
